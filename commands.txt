@@ -1,0 +1,164 @@
+# Discord Voice Announcer Bot - Command Reference Guide
+=======================================================
+
+This document provides a comprehensive list of all available commands for the Discord Voice Announcer Bot, with examples and permissions information.
+
+Table of Contents:
+-----------------
+1. General Commands
+2. Announcement Toggle Commands
+3. Whitelist Commands
+4. Custom Announcement Commands
+
+Note: Commands use "!" as the default prefix, but this can be changed in the .env file.
+
+====================
+1. GENERAL COMMANDS
+====================
+
+!status
+-------
+Description: Shows the current status and configuration of the bot
+Permissions: None (anyone can use)
+Usage: !status
+Output example: 
+  "Voice Announcer Bot Status"
+  • Active Servers: 1
+  • Active Voice Connections: 0
+  • TTS Language: en
+  • Users in Voice Channels: 5
+  • Join Announcements: Enabled
+  • Leave Announcements: Enabled
+  • Custom Announcements: 2 users
+  • Whitelist Mode: Disabled (0 users)
+
+!announce [message]
+------------------
+Description: Tests the announcement system
+Permissions: None, but user must be in a voice channel
+Usage: !announce Hello everyone
+       !announce                    (Uses your username as the message)
+Output example: 
+  "Testing announcement system with: 'Hello everyone'"
+  (Bot will join your voice channel and speak the message)
+
+!help
+-----
+Description: Shows help information for all commands or a specific command
+Permissions: None (anyone can use)
+Usage: !help
+       !help announce
+       !help whitelist
+Output example:
+  "!announce [message] - Test the announcement system with an optional custom message"
+
+===============================
+2. ANNOUNCEMENT TOGGLE COMMANDS
+===============================
+
+!togglejoins
+-----------
+Description: Toggles join announcements on/off
+Permissions: None (anyone can use)
+Usage: !togglejoins
+Output example: 
+  "Join announcements are now disabled"
+  or
+  "Join announcements are now enabled"
+
+!toggleleaves
+------------
+Description: Toggles leave announcements on/off  
+Permissions: None (anyone can use)
+Usage: !toggleleaves
+Output example:
+  "Leave announcements are now disabled"
+  or
+  "Leave announcements are now enabled"
+
+======================
+3. WHITELIST COMMANDS
+======================
+
+!togglewhitelist
+---------------
+Description: Toggles whitelist mode on/off
+Permissions: Administrator
+Usage: !togglewhitelist
+Output example:
+  "Whitelist mode is now enabled. Only whitelisted users will trigger announcements."
+  or
+  "Whitelist mode is now disabled. All users will trigger announcements."
+
+!whitelist add @user
+------------------
+Description: Adds a user to the announcement whitelist
+Permissions: Administrator
+Usage: !whitelist add @Username
+Output example:
+  "Username has been added to the announcement whitelist."
+  (If whitelist mode is disabled): "Note: Whitelist mode is currently disabled. Use `!togglewhitelist` to enable it."
+
+!whitelist remove @user
+---------------------
+Description: Removes a user from the announcement whitelist
+Permissions: Administrator
+Usage: !whitelist remove @Username
+Output example:
+  "Username has been removed from the announcement whitelist."
+
+!whitelist list
+-------------
+Description: Lists all users in the announcement whitelist
+Permissions: None (anyone can use)
+Usage: !whitelist list
+Output example:
+  "Announcement Whitelist"
+  "Whitelist Mode: Enabled"
+  "Users:"
+  "1. @Username (Display Name)"
+  "2. @AnotherUser (Display Name)"
+
+================================
+4. CUSTOM ANNOUNCEMENT COMMANDS
+================================
+
+!addcustom @user join|leave message
+--------------------------------
+Description: Adds a custom join or leave message for a specific user
+Permissions: Administrator
+Usage: !addcustom @Username join The legendary {username} has arrived!
+       !addcustom @Username leave {username} has vanished into thin air!
+Output example:
+  "Custom join message for Username has been set!"
+
+!removecustom @user [join|leave|both]
+---------------------------------
+Description: Removes custom message(s) for a specific user
+Permissions: Administrator
+Usage: !removecustom @Username join     (Remove just join message)
+       !removecustom @Username leave    (Remove just leave message)
+       !removecustom @Username both     (Remove both messages)
+       !removecustom @Username          (Same as "both")
+Output example:
+  "Custom join message for Username removed!"
+  or
+  "Custom join and leave messages for Username removed!"
+
+!listcustom
+---------
+Description: Lists all custom announcements
+Permissions: None (anyone can use)
+Usage: !listcustom
+Output example:
+  "Custom Announcements"
+  "Users with custom join/leave messages"
+  
+  "Username"
+  "Join: The legendary {username} has arrived!"
+  "Leave: {username} has vanished into thin air!"
+  
+  "AnotherUser"
+  "Join: None"
+  "Leave: {username} out!"
+

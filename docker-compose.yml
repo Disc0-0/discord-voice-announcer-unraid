@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  discord-voice-announcer:
+    image: disc0/discord-voice-announcer:latest
+    container_name: discord-voice-announcer
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN=your_discord_bot_token_here  # Required: Replace with your actual Discord bot token
+      - TZ=Europe/London                           # Optional: Set your timezone
+      - PUID=99                                    # Optional: User ID for file permissions
+      - PGID=100                                   # Optional: Group ID for file permissions
+      - VOICE_LANGUAGE=en                          # Optional: TTS language (default: en)
+      - COMMAND_PREFIX=!                           # Optional: Command prefix (default: !)
+      - ANNOUNCE_JOINS=True                        # Optional: Enable join announcements (default: True)
+      - ANNOUNCE_LEAVES=True                       # Optional: Enable leave announcements (default: True)
+      - WHITELIST_MODE=False                       # Optional: Enable whitelist mode (default: False)
+    volumes:
+      - ./data:/app/data                           # Persistent storage for announcements and whitelist
+    # For Unraid users, you might want to use a specific path like:
+    # - /mnt/user/appdata/discord-voice-announcer:/app/data
+

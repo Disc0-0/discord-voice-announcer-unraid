@@ -1,0 +1,58 @@
+# Discord Voice Announcer Bot .gitignore
+
+# Environment variables file (contains sensitive bot token)
+.env
+.env.local
+.env.development
+.env.production
+
+# Python virtual environment
+venv/
+env/
+ENV/
+virtualenv/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary audio files
+*.mp3
+*.wav
+*.ogg
+temp/
+tmp/
+
+# Logs
+*.log
+logs/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.atom/
+.buildpath
+.project
+.settings/
+.classpath
+.factorypath
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Other
+.history/
+.hypothesis/
+*.so
+

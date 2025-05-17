@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>discord-voice-announcer</Name>
+  <Repository>disc0/discord-voice-announcer</Repository>
+  <Registry>https://hub.docker.com/r/disc0/discord-voice-announcer/</Registry>
+  <Network>bridge</Network>
+  <MyIP></MyIP>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Disc0-0/discord-voice-announcer/issues</Support>
+  <Project>https://github.com/Disc0-0/discord-voice-announcer</Project>
+  <Overview>
+    Discord Voice Announcer is a bot that announces users joining and leaving voice channels using text-to-speech (TTS). 
+    
+    Features:
+    ★ Voice channel join and leave announcements with TTS
+    ★ Custom announcements for specific users
+    ★ Whitelist mode to only announce selected users
+    ★ Configurable commands and language
+    
+    See the GitHub page for complete documentation and command reference.
+  </Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI></WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Disc0-0/discord-voice-announcer/unraid/discord-voice-announcer.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Disc0-0/discord-voice-announcer/unraid/discord-icon.png</Icon>
+  <ExtraParams></ExtraParams>
+  <PostArgs></PostArgs>
+  <CPUset></CPUset>
+  <DateInstalled>1684375440</DateInstalled>
+  <DonateText>If you find this app useful, please consider supporting the developer</DonateText>
+  <DonateLink>https://github.com/Disc0-0/discord-voice-announcer</DonateLink>
+  <Description>
+    Discord Voice Announcer is a bot that announces users joining and leaving voice channels using text-to-speech (TTS).
+    
+    Features:
+    - Voice channel join/leave announcements with TTS
+    - Custom announcements for specific users
+    - Whitelist mode to only announce selected users
+    - Configurable commands and language
+  </Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/discord-voice-announcer</HostDir>
+      <ContainerDir>/app/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>your_discord_bot_token_here</Value>
+      <Name>DISCORD_TOKEN</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>en</Value>
+      <Name>VOICE_LANGUAGE</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>!</Value>
+      <Name>COMMAND_PREFIX</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>True</Value>
+      <Name>ANNOUNCE_JOINS</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>True</Value>
+      <Name>ANNOUNCE_LEAVES</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>False</Value>
+      <Name>WHITELIST_MODE</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>99</Value>
+      <Name>PUID</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>100</Value>
+      <Name>PGID</Name>
+      <Mode>rw</Mode>
+    </Variable>
+    <Variable>
+      <Value>Europe/London</Value>
+      <Name>TZ</Name>
+      <Mode>rw</Mode>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Data Directory" Target="/app/data" Default="/mnt/user/appdata/discord-voice-announcer" Mode="rw" Description="Location for persistent data (custom announcements, whitelist)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/discord-voice-announcer</Config>
+  <Config Name="Discord Bot Token" Target="DISCORD_TOKEN" Default="your_discord_bot_token_here" Mode="rw" Description="Your Discord bot token from the Discord Developer Portal" Type="Variable" Display="always" Required="true" Mask="true">your_discord_bot_token_here</Config>
+  <Config Name="TTS Language" Target="VOICE_LANGUAGE" Default="en" Mode="rw" Description="Language code for text-to-speech (default: en)" Type="Variable" Display="advanced" Required="false" Mask="false">en</Config>
+  <Config Name="Command Prefix" Target="COMMAND_PREFIX" Default="!" Mode="rw" Description="Prefix for bot commands (default: !)" Type="Variable" Display="advanced" Required="false" Mask="false">!</Config>
+  <Config Name="Announce Joins" Target="ANNOUNCE_JOINS" Default="True" Mode="rw" Description="Whether to announce users joining voice channels (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false">True</Config>
+  <Config Name="Announce Leaves" Target="ANNOUNCE_LEAVES" Default="True" Mode="rw" Description="Whether to announce users leaving voice channels (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false">True</Config>
+  <Config Name="Whitelist Mode" Target="WHITELIST_MODE" Default="False" Mode="rw" Description="Whether to only announce whitelisted users (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false">False</Config>
+  <Config Name="User ID" Target="PUID" Default="99" Mode="rw" Description="User ID for file permissions" Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="Group ID" Target="PGID" Default="100" Mode="rw" Description="Group ID for file permissions" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="Timezone" Target="TZ" Default="Europe/London" Mode="rw" Description="Timezone" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/London</Config>
+</Container>
+
