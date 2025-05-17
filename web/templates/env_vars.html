@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% block title %}Environment Variables{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-cogs"></i> Environment Variables</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Configure the bot's environment variables. These settings control the behavior of your Discord Voice Announcer.</p>
+                
+                <form method="POST" action="{{ url_for('environment_variables') }}">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Authentication</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="DISCORD_TOKEN" class="form-label">Discord Bot Token</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="DISCORD_TOKEN" name="DISCORD_TOKEN" value="{{ env_vars.DISCORD_TOKEN }}" aria-describedby="tokenHelp">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleTokenBtn">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div id="tokenHelp" class="form-text">Your Discord bot token. Leave blank to keep current value.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Language & Localization</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="VOICE_LANGUAGE" class="form-label">Voice Language</label>
+                                        <select class="form-select" id="VOICE_LANGUAGE" name="VOICE_LANGUAGE" aria-describedby="langHelp">
+                                            <option value="en" {% if env_vars.VOICE_LANGUAGE == 'en' %}selected{% endif %}>English (en)</option>
+                                            <option value="fr" {% if env_vars.VOICE_LANGUAGE == 'fr' %}selected{% endif %}>French (fr)</option>
+                                            <option value="de" {% if env_vars.VOICE_LANGUAGE == 'de' %}selected{% endif %}>German (de)</option>
+                                            <option value="es" {% if env_vars.VOICE_LANGUAGE == 'es' %}selected{% endif %}>Spanish (es)</option>
+                                            <option value="it" {% if env_vars.VOICE_LANGUAGE == 'it' %}selected{% endif %}>Italian (it)</option>
+                                            <option value="ja" {% if env_vars.VOICE_LANGUAGE == 'ja' %}selected{% endif %}>Japanese (ja)</option>
+                                            <option value="ko" {% if env_vars.VOICE_LANGUAGE == 'ko' %}selected{% endif %}>Korean (ko)</option>
+                                            <option value="pt" {% if env_vars.VOICE_LANGUAGE == 'pt' %}selected{% endif %}>Portuguese (pt)</option>
+                                            <option value="ru" {% if env_vars.VOICE_LANGUAGE == 'ru' %}selected{% endif %}>Russian (ru)</option>
+                                            <option value="zh" {% if env_vars.VOICE_LANGUAGE == 'zh' %}selected{% endif %}>Chinese (zh)</option>
+                                        </select>
+                                        <div id="langHelp" class="form-text">Language used for text-to-speech announcements.</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="TZ" class="form-label">Timezone</label>
+                                        <input type="text" class="form-control" id="TZ" name="TZ" value="{{ env_vars.TZ }}" aria-describedby="tzHelp">
+                                        <div id="tzHelp" class="form-text">Timezone for the bot (e.g., UTC, America/New_York, Europe/London).</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Bot Behavior</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="COMMAND_PREFIX" class="form-label">Command Prefix</label>
+                                        <input type="text" class="form-control" id="COMMAND_PREFIX" name="COMMAND_PREFIX" value="{{ env_vars.COMMAND_PREFIX }}" aria-describedby="prefixHelp">
+                                        <div id="prefixHelp" class="form-text">The prefix used for bot commands (e.g., !, /, $).</div>
+                                    </div>
+                                
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="ANNOUNCE_JOINS" name="ANNOUNCE_JOINS" value="True" {% if env_vars.ANNOUNCE_JOINS.lower() in ('true', 'yes', '1', 't') %}checked{% endif %}>
+                                        <label class="form-check-label" for="ANNOUNCE_JOINS">Announce Joins</label>
+                                        <div class="form-text">Announce when users join voice channels.</div>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="ANNOUNCE_LEAVES" name="ANNOUNCE_LEAVES" value="True" {% if env_vars.ANNOUNCE_LEAVES.lower() in ('true', 'yes', '1', 't') %}checked{% endif %}>
+                                        <label class="form-check-label" for="ANNOUNCE_LEAVES">Announce Leaves</label>
+                                        <div class="form-text">Announce when users leave voice channels.</div>
+                                    </div>
+                                    
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" id="WHITELIST_MODE" name="WHITELIST_MODE" value="True" {% if env_vars.WHITELIST_MODE.lower() in ('true', 'yes', '1', 't') %}checked{% endif %}>
+                                        <label class="form-check-label" for="WHITELIST_MODE">Whitelist Mode</label>
+                                        <div class="form-text">Only announce whitelisted users (configured in the Whitelist section).</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%
+

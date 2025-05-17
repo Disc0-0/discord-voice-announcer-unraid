@@ -1,3 +1,108 @@
+# Discord Voice Announcer with Web Interface
+
+This project provides a Discord bot that announces users joining and leaving voice channels using text-to-speech (TTS), along with a web interface for easy management.
+
+## Features
+
+- **Voice Announcements**: Announces when users join or leave voice channels
+- **Custom Announcements**: Configure custom messages for specific users
+- **Whitelist Mode**: Option to only announce specific users
+- **Multiple Language Support**: TTS in various languages
+- **Web Interface**: Easy-to-use web dashboard for configuration
+- **Docker Integration**: Simple deployment with Docker
+
+## Quick Start
+
+### Prerequisites
+
+- Docker and Docker Compose installed
+- A Discord bot token ([Create a Discord Bot](https://discord.com/developers/applications))
+
+### Installation
+
+#### Windows
+
+1. Clone this repository
+2. Run the PowerShell setup script:
+   ```powershell
+   .\install.ps1
+   ```
+3. Enter your Discord bot token when prompted
+
+#### Linux/macOS
+
+1. Clone this repository
+2. Run the bash setup script:
+   ```bash
+   chmod +x setup.sh
+   ./setup.sh
+   ```
+3. Enter your Discord bot token when prompted
+
+### Manual Setup
+
+1. Copy `.env.example` to `.env`
+2. Edit `.env` and add your Discord bot token
+3. Create the data directory:
+   ```bash
+   mkdir -p data
+   ```
+4. Run the containers:
+   ```bash
+   docker-compose up -d
+   ```
+
+## Accessing the Web Interface
+
+Once the containers are running, you can access the web interface at:
+```
+http://localhost:5000
+```
+
+From here, you can:
+- Configure environment variables
+- Manage custom announcements
+- Set up the whitelist
+- Restart the bot when needed
+
+## Configuration Options
+
+The following environment variables can be configured in the `.env` file or through the web interface:
+
+| Variable | Description | Default |
+| --- | --- | --- |
+| `DISCORD_TOKEN` | Your Discord bot token | (Required) |
+| `VOICE_LANGUAGE` | Language for TTS announcements | `en` |
+| `COMMAND_PREFIX` | Prefix for bot commands | `!` |
+| `ANNOUNCE_JOINS` | Whether to announce users joining | `True` |
+| `ANNOUNCE_LEAVES` | Whether to announce users leaving | `True` |
+| `WHITELIST_MODE` | Whether to only announce whitelisted users | `False` |
+| `TZ` | Timezone | `UTC` |
+
+## Bot Commands
+
+The bot supports the following Discord commands:
+
+- `!announce [name]` - Test the announcement system
+- `!status` - Show bot status and configuration
+- `!togglejoins` - Toggle join announcements on/off
+- `!toggleleaves` - Toggle leave announcements on/off
+- `!togglewhitelist` - Toggle whitelist mode on/off
+- `!whitelist add @user` - Add a user to the whitelist
+- `!whitelist remove @user` - Remove a user from the whitelist
+- `!whitelist list` - List all users in the whitelist
+- `!addcustom @user join/leave [message]` - Add a custom message for a user
+- `!removecustom @user join/leave/both` - Remove custom message(s) for a user
+- `!listcustom` - List all custom announcements
+
+## Support
+
+For issues or questions, please open an issue on GitHub.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 # Discord Voice Announcer Bot for Unraid
 
 [![Unraid Template](https://img.shields.io/badge/Unraid-Template-green)](https://github.com/Disc0-0/discord-voice-announcer-unraid/blob/main/discord-voice-announcer.xml)
@@ -360,5 +465,50 @@ Whitelist mode and custom announcements can be used together. When both are enab
 
 - [GitHub Repository](https://github.com/Disc0-0/discord-voice-announcer-unraid)
 - [Original Discord Voice Announcer Bot](https://github.com/Disc0-0/discord-voice-announcer)
--
+
+## Web Interface
+
+The Discord Voice Announcer now includes a web interface for easy management of your bot settings. This provides a user-friendly way to configure the bot without using Discord commands.
+
+### Web Interface Features
+
+- **Environment Configuration**: Edit bot settings like language, command prefix, etc.
+- **Custom Announcements Management**: Add, edit, and remove custom announcements
+- **Whitelist Control**: Manage the whitelist of users in a simple interface
+- **Bot Controls**: Restart the bot when needed directly from the interface
+
+### Accessing the Web Interface
+
+Once running, the web interface is available at:
+```
+http://your-server-ip:5000
+```
+
+### Setting Up the Web Interface
+
+The web interface is included in the docker-compose setup and will automatically be deployed when you follow the installation instructions above.
+
+For manual configuration, the web interface requires:
+1. Proper volume mapping to access the same data as the bot
+2. Access to the Docker socket to control the bot container
+3. Network connectivity to the bot container
+
+The `docker-compose.yml` file includes all necessary configuration for the web interface to work properly.
+
+## Quick Setup Guide
+
+1. Clone this repository to your server
+2. Edit the `.env` file and change the following:
+   - Replace `your_discord_bot_token_here` with your Discord bot token
+   - (Optional) Change the timezone (TZ) to match your location
+3. Run `docker-compose up -d` to start both containers
+4. Access the web interface at `http://your-server-ip:5000`
+
+## Security Considerations
+
+- The web interface uses a random secret key for sessions
+- For additional security, consider:
+  - Running behind a reverse proxy with authentication
+  - Using a firewall to restrict access to port 5000
+  - Using a VPN when accessing the interface remotely
 

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-home"></i> Discord Voice Announcer Admin Panel</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Welcome to the Discord Voice Announcer administration panel. From here, you can manage all aspects of your Discord Voice Announcer bot.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-cogs"></i> Environment Settings</h4>
+            </div>
+            <div class="card-body">
+                <p>Configure the bot's environment variables including Discord token, language settings, and announcement preferences.</p>
+                <a href="/env" class="btn btn-discord"><i class="fas fa-wrench"></i> Configure</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-bullhorn"></i> Custom Announcements</h4>
+            </div>
+            <div class="card-body">
+                <p>Set up personalized join and leave messages for specific users on your Discord server.</p>
+                <a href="/custom_announcements" class="btn btn-discord"><i class="fas fa-edit"></i> Manage</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-user-check"></i> Whitelist</h4>
+            </div>
+            <div class="card-body">
+                <p>Manage which users should trigger voice announcements when they join or leave voice channels.</p>
+                <a href="/whitelist" class="btn btn-discord"><i class="fas fa-list"></i> Configure</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-info-circle"></i> Quick Guide</h4>
+            </div>
+            <div class="card-body">
+                <h5>Getting Started</h5>
+                <ol>
+                    <li>Make sure your Discord bot token is correctly set in the Environment Settings</li>
+                    <li>Configure which languages to use for announcements</li>
+                    <li>Add custom announcements for specific users if desired</li>
+                    <li>Set up a whitelist if you want to limit announcements to specific users</li>
+                </ol>
+                
+                <h5>Useful Tips</h5>
+                <ul>
+                    <li>Use the <code>{username}</code> placeholder in custom announ
+
